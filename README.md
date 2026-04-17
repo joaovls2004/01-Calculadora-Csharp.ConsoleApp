@@ -1,6 +1,6 @@
 # Calculadora C-sharp
 
-![](Calculadora.ConsoleApp\docs\calculadora.gif)
+![](./Calculadora.ConsoleApp/docs/calculadora.gif)
 
 
 ## Introdução
