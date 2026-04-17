@@ -9,9 +9,12 @@
 // requisito 6:  Nossa Calculadora deve dar a possibilidade de produzir a tabuada de um número informado
 // requisito 7: Nossa Calculadora deve dar a possibilidade de visualizar o histórico de operações 
 
-bool deveContinuar = true;//atribuição
 
-while (deveContinuar == true)//condição
+string[] historicoOperacoes = new string[100]; // Array / Vetor / arranjo
+int contadorOperacoes = 0;
+
+
+while (true == true)//condição
 {
    // Console.clear();
 
@@ -21,10 +24,11 @@ while (deveContinuar == true)//condição
 
     Console.WriteLine("1 - Soma");
     Console.WriteLine("2 - subtração");
-    Console.WriteLine("3 - multiplicaçãp");
+    Console.WriteLine("3 - multiplicação");
     Console.WriteLine("4 - divisão");
     Console.WriteLine("5-Tabuada");
-    Console.WriteLine("s - sair");
+    Console.WriteLine("6-histórico de operações");
+    Console.WriteLine("S - sair");
 
 
     Console.WriteLine();
@@ -33,11 +37,9 @@ while (deveContinuar == true)//condição
     Console.Write("selecione uma opção válida: ");
     string? operacaoSelecionada = Console.ReadLine();
 
-    if (operacaoSelecionada == "s")
-    {
-       deveContinuar = false;   
-
-       continue;
+    if (operacaoSelecionada == "S" || operacaoSelecionada == "s")
+    {        
+       return;
     }
     //Lógica da tabuada
     if(operacaoSelecionada == "5")
@@ -64,7 +66,22 @@ while (deveContinuar == true)//condição
 
     }
 
+    else if(operacaoSelecionada == "6") // Visualizar o histórico de operações
+    {
+        Console.WriteLine("Histórico de operações: ");
+        Console.WriteLine("--------------------------------------");
 
+
+
+       for (int contador = 0; contador < contadorOperacoes; contador++)
+        {
+          Console.WriteLine(historicoOperacoes[contador]);
+        } 
+
+        Console.ReadLine();
+
+        continue;
+    }
 
     //Lógica das Operações de Cálculo
      
@@ -99,16 +116,22 @@ while (deveContinuar == true)//condição
     decimal segundoNumero =  Convert.ToDecimal(strSegundoNumero);
 
     decimal resultado ;
+
+    string textoOperacao;
+
     switch (operacaoSelecionada) // operador do switch
     {
          case "1":
              resultado = primeiroNumero + segundoNumero;
+             textoOperacao = $"{primeiroNumero} + {segundoNumero} = {resultado}";
              break;
           case "2":
              resultado = primeiroNumero - segundoNumero;
+                textoOperacao = $"{primeiroNumero} - {segundoNumero} = {resultado}";
              break;
          case "3":
              resultado = primeiroNumero * segundoNumero;
+                textoOperacao = $"{primeiroNumero} * {segundoNumero} = {resultado}";
              break;
          case "4":
         if(segundoNumero == 0)
@@ -119,6 +142,7 @@ while (deveContinuar == true)//condição
             }
 
              resultado = primeiroNumero / segundoNumero;
+             textoOperacao = $"{primeiroNumero} / {segundoNumero} = {resultado}";
              break;
     default:
         Console.WriteLine("Selecione uma operação válida!");
@@ -127,6 +151,14 @@ while (deveContinuar == true)//condição
 
         continue;
 
+    }
+
+    if (contadorOperacoes < historicoOperacoes.Length)
+    {
+         historicoOperacoes[contadorOperacoes] = textoOperacao;
+
+         contadorOperacoes = contadorOperacoes + 1;
+   
     }
 
     Console.WriteLine("A operação do dois números resulta em: " + resultado);
